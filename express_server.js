@@ -48,3 +48,13 @@ app.post("/urls", (req, res) => {
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
 });
+
+function generateRandomString(){
+  var chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz";
+  let shortURL = "";
+  let randomChar = "";
+  for(i = 0; i < 6; i++) {
+    randomChar = chars[Math.floor(Math.random() * chars)]
+    shortURl += chars.substring(rnum,rnum +1 )
+  }
+}
