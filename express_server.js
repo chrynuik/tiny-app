@@ -12,15 +12,16 @@ let urlDatabase = {
   "9sm5xK": 'http://www.google.com'
 };
 
+//delete the short url
 app.post("/urls/:id/delete", (req, res) => {
-  // let templateVars = {
-  //   urls: urlDatabase,
-  //   shortURL: req.params.id
-  // };
-  // console.log("IS THIS THE KEY????" + templateVars.shortURL);
   delete urlDatabase[req.params.id];
-  // console.log("IS THIS THE KEY????" + templateVars.shortURL);
   res.redirect('/urls/');
+});
+
+///edit the long url
+app.post("/urls/:id", (req, res) =>{
+  urlDatabase[req.params.id] = req.body.longURL;
+  res.redirect(`/urls/${req.params.id}`);
 });
 
 app.get("/", (req, res) => {
