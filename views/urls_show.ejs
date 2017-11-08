@@ -9,9 +9,7 @@
       <% include partials/_header %>
     </header>
     <div>
-        <%= shortURL %>
-        <%= urls[shortURL] %>
-        <a href="#"></a>
+        <a href="/u/<%= shortURL %>"><%= shortURL %></a>: <%= urls[shortURL] %>
     </div>
 </body>
 </html>
