@@ -33,6 +33,10 @@ app.get("/urls/new", (req, res) => {
   res.render("urls_new");
 });
 
+app.get("/u/:shortURL", (req, res) => {
+  let longURL = urlDatabase[req.params.shortURL];
+  res.redirect(longURL)
+})
 app.get("/urls/:id", (req, res) => {
   let templateVars = { urls: urlDatabase, shortURL: req.params.id };
   res.render("urls_show", templateVars);
@@ -42,19 +46,21 @@ app.get("/urls/:id", (req, res) => {
 
 app.post("/urls", (req, res) => {
   console.log(req.body);
-  res.send("OK");
+  urlDatabase[rString] = req.body['longURL'];
+  res.redirect(`/urls/${rString}`);
 });
 
 app.listen(PORT, () => {
-  console.log(`Example app listening on port ${PORT}`);
+  console.log(`Example app listening on port ${PORT} ${rString}`);
 });
 
-function generateRandomString(){
-  var chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz";
-  let shortURL = "";
-  let randomChar = "";
-  for(i = 0; i < 6; i++) {
-    randomChar = chars[Math.floor(Math.random() * chars)]
-    shortURl += chars.substring(rnum,rnum +1 )
-  }
+
+let rString = generateRandomString('0123456789abcdefghijklmnopqrstuvwxyz', 6);
+
+function generateRandomString(chars, length) {
+    let result = '';
+    for (let i = length; i > 0; --i) {
+      result += chars[Math.floor(Math.random() * chars.length)];
+    }
+    return result;
 }
