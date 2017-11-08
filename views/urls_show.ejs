@@ -10,6 +10,12 @@
     </header>
     <div>
         <a href="/u/<%= shortURL %>"><%= shortURL %></a>: <%= urls[shortURL] %>
+        <form method="POST" action="/urls/<%= shortURL %>">
+            <input id="longURL" type="text" name="longURL" placeholder="http://" style="width: 300px" value="<%= urls[shortURL] %>">
+            <input type="submit" value="Edit">
+          </form>
     </div>
+
+    <a href="/urls/" style="margin-top: 20px; display: inline-block">Got back to list of urls</a>
 </body>
 </html>
