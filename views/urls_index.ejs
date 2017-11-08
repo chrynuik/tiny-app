@@ -10,7 +10,7 @@
     </header>
     <ul>
       <% for (var url in urls) { %>
-        <li><%= url + "-" + urls[url] %><a href="#"></a></li>
+        <li><a href="/u/<%=url %>"><%= url %></a>: <%=urls[url] %></li>
       <% } %>
     </ul>
 </body>
