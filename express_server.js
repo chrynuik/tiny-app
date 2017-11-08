@@ -1,16 +1,27 @@
-var express = require("express");
-var app = express();
-var PORT = process.env.PORT || 8080;
+const express = require("express");
+const app = express();
+const PORT = process.env.PORT || 8080;
 const bodyParser = require("body-parser");
 
 app.use(bodyParser.urlencoded({extended: true}));
 
 app.set("view engine", "ejs");
 
-var urlDatabase = {
+let urlDatabase = {
   "b2xVn2": "http://www.lighthouselabs.ca",
   "9sm5xK": 'http://www.google.com'
 };
+
+app.post("/urls/:id/delete", (req, res) => {
+  // let templateVars = {
+  //   urls: urlDatabase,
+  //   shortURL: req.params.id
+  // };
+  // console.log("IS THIS THE KEY????" + templateVars.shortURL);
+  delete urlDatabase[req.params.id];
+  // console.log("IS THIS THE KEY????" + templateVars.shortURL);
+  res.redirect('/urls/');
+});
 
 app.get("/", (req, res) => {
   res.end("Hello!");
@@ -49,6 +60,8 @@ app.post("/urls", (req, res) => {
   urlDatabase[rString] = req.body['longURL'];
   res.redirect(`/urls/${rString}`);
 });
+
+
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT} ${rString}`);
