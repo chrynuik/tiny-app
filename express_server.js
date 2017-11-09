@@ -32,12 +32,17 @@ app.post("/urls/:id", (req, res) =>{
 //login
 app.post("/login", (req, res) =>{
   let username = req.body.username;
-  console.log("username before settign cookie" + username);
   username = res.cookie("username", username) ;
-  // let templateVars = {
-  //   username: req.cookies.username
-
   res.redirect(`/urls/`);
+});
+
+//logout
+app.post("/logout", (req, res) => {
+  // let username = req.body.username;
+  // username = res.cookie("username", undefined) ;
+  res.clearCookie("username");
+
+  res.redirect(`/urls/`)
 });
 app.get("/", (req, res) => {
   res.end("Hello!");
