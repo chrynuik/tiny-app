@@ -15,6 +15,8 @@ let urlDatabase = {
   "9sm5xK": 'http://www.google.com'
 };
 
+let rString = generateRandomString('0123456789abcdefghijklmnopqrstuvwxyz', 6);
+
 //delete the short url
 app.post("/urls/:id/delete", (req, res) => {
   delete urlDatabase[req.params.id];
@@ -32,7 +34,8 @@ app.post("/login", (req, res) =>{
   let username = req.body.username;
   console.log("username before settign cookie" + username);
   username = res.cookie("username", username) ;
-  console.log(username);
+  // let templateVars = {
+  //   username: req.cookies.username
 
   res.redirect(`/urls/`);
 });
@@ -49,12 +52,19 @@ app.get("/hello", (req, res) => {
 })
 
 app.get("/urls", (req, res) => {
-  let templateVars = { urls : urlDatabase};
+  let templateVars = {
+    urls : urlDatabase,
+    username: req.cookies["username"]
+  };
   res.render("urls_index", templateVars);
 })
 
 app.get("/urls/new", (req, res) => {
-  res.render("urls_new");
+  let templateVars = {
+    urls : urlDatabase,
+    username: req.cookies["username"]
+  };
+  res.render("urls_new", templateVars);
 });
 
 app.get("/u/:shortURL", (req, res) => {
@@ -62,7 +72,10 @@ app.get("/u/:shortURL", (req, res) => {
   res.redirect(longURL)
 })
 app.get("/urls/:id", (req, res) => {
-  let templateVars = { urls: urlDatabase, shortURL: req.params.id };
+  let templateVars = {
+    urls: urlDatabase, shortURL: req.params.id,
+    username: req.cookies["username"],
+  };
   res.render("urls_show", templateVars);
 });
 
@@ -81,7 +94,7 @@ app.listen(PORT, () => {
 });
 
 
-let rString = generateRandomString('0123456789abcdefghijklmnopqrstuvwxyz', 6);
+
 
 function generateRandomString(chars, length) {
     let result = '';
