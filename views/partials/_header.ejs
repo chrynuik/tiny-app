@@ -2,12 +2,19 @@
   Short URLS!!
 </h1>
 
-<div>
-  You are logged in as <%= username %>
-</div>
-
+<% if (username === undefined) {%>
 <form method="POST" action="/login">
   <label for="username">Name</label>
   <input id="username" type="text" name="username" placeholder="User Name" style="width: 300px">
   <input type="submit" value="Submit user name">
 </form>
+
+<%} else {%>
+<div>
+  You are logged in as <%= username %>
+  <form method="POST" action="/logout">
+    <input type="submit" value="logout">
+  </form>
+</div>
+<% };%>
+
