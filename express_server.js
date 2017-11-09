@@ -29,10 +29,10 @@ app.post("/urls/:id", (req, res) =>{
 
 //login
 app.post("/login", (req, res) =>{
-  let userName = req.body.userName;
-  console.log("userName before settign cookie" + userName);
-  userName = res.cookie(userName) ;
-  console.log(userName);
+  let username = req.body.username;
+  console.log("username before settign cookie" + username);
+  username = res.cookie("username", username) ;
+  console.log(username);
 
   res.redirect(`/urls/`);
 });
