@@ -27,6 +27,15 @@ app.post("/urls/:id", (req, res) =>{
   res.redirect(`/urls/${req.params.id}`);
 });
 
+//login
+app.post("/login", (req, res) =>{
+  let userName = req.body.userName;
+  console.log("userName before settign cookie" + userName);
+  userName = res.cookie(userName) ;
+  console.log(userName);
+
+  res.redirect(`/urls/`);
+});
 app.get("/", (req, res) => {
   res.end("Hello!");
 });
