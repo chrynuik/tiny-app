@@ -44,6 +44,21 @@ app.post("/logout", (req, res) => {
 
   res.redirect(`/urls/`)
 });
+
+//register
+app.get("/register", (req, res) => {
+  let templateVars = {
+    email: req.body.email,
+    password: req.body.password,
+    username: req.body.username
+  }
+  res.render("register", templateVars);
+});
+app.post("/register", (req, res) => {
+  const {email, code} = req.bod;
+
+  res.redirect("/register/");
+});
 app.get("/", (req, res) => {
   res.end("Hello!");
 });
