@@ -65,7 +65,6 @@ app.get("/register", (req, res) => {
   let templateVars = {
     username: req.body.username
   };
-
   res.render("register", templateVars);
 });
 
@@ -77,34 +76,27 @@ app.post("/register", (req, res) => {
 
   let id = randomId;
 
+  console.log(email);
 
-  //id = req.cookies["id"]
+  if (!email && !password) {
+      res.status(400).send("ooops!");
+  }
+    for (index in users) {
+      if (email === users[index].email) {
+        res.status(400).send("email already exists");
+      }
+    }
 
-  // for (index in users){
-  //   console.log(users[index]);
-  //   return;
-  // }
+    users.id = {
+      "id": id,
+      "email": email,
+      "password": password
 
-  users.id = {
-    "id": id,
-    "email": email,
-    "password": password
+    };
 
-  };
+    let username = res.cookie("username", id) ;
 
-  let username = res.cookie("username", id) ;
-
-
-  // for (randId in users) {
-  //   if (users.randId) {
-  //     console.log("found user:" + users.randId);
-  //     res.redirect("/urls/");
-  //   } else {
-  //     res.redirect('/register');
-  //   }
-  // }
-  // users[randomId]
-  res.redirect("/urls/");
+    res.redirect("/urls/");
 });
 
 //root
@@ -164,7 +156,7 @@ app.post("/urls", (req, res) => {
 
 
 app.listen(PORT, () => {
-  console.log(`Example app listening on port ${PORT} ${rString}`);
+  console.log(`Example app listening on port ${PORT}`);
 });
 
 
