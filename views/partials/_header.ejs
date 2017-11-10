@@ -2,19 +2,24 @@
   Short URLS!!
 </h1>
 
-<% if (username === undefined) {%>
-<form method="POST" action="/login">
-  <label for="username">Name</label>
-  <input id="username" type="text" name="username" placeholder="User Name" style="width: 300px">
-  <input type="submit" value="Submit user name">
-</form>
+<nav>
+  <ul style="display: flex; width: 100%; justify-content: center; list-style: none; padding: 0" >
+    <li style ="margin-right: 1rem"><a href="/login">Login Now</a></li>
+    <li style ="margin-right: 1rem"><a href="/register">Register</a></li>
+    <li style ="margin-right: 1rem"><a href="/urls">View urls</a></li>
+    <li style ="margin-right: 1rem"><a href="/urls/new">Add url</a></li>
+  </ul>
+</nav>
 
+<% if (!id) {%>
+  <a href="/login">login now!</a>
 <%} else {%>
 <div>
-  You are logged in as <%= username %>
+  You are logged in as <%= email %>
   <form method="POST" action="/logout">
     <input type="submit" value="logout">
   </form>
 </div>
 <% };%>
+
 
