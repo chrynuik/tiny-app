@@ -1,21 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>TinyApp</title>
+  <% include partials/_head %>
 </head>
 <body>
-    <!-- Add your EJS code here -->
     <header>
       <% include partials/_header %>
     </header>
     <div>
-        <a href="/u/<%= shortURL %>"><%= shortURL %></a>: <%= urls[shortURL] %>
-        <form method="POST" action="/urls/<%= shortURL %>">
-            <input id="longURL" type="text" name="longURL" placeholder="http://" style="width: 300px" value="<%= urls[shortURL] %>">
+        <div class="url-group">
+          <a href="/u/<%= shortURL %>"><%= shortURL %></a>: <%= urls[shortURL] %>
+        </div>
+        <form method="POST" action="/urls/<%= shortURL %>" class="body-form">
+            <input id="longURL" type="text" name="longURL" placeholder="http://" value="<%= urls[shortURL] %>">
             <input type="submit" value="Edit">
           </form>
     </div>
-
-    <a href="/urls/" style="margin-top: 20px; display: inline-block">Got back to list of urls</a>
 </body>
 </html>
