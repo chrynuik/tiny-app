@@ -25,9 +25,16 @@ const users = {
   }
 }
 
+
 let urlDatabase = {
-  "b2xVn2": "http://www.lighthouselabs.ca",
-  "9sm5xK": 'http://www.google.com'
+  "b2xVn2": {
+    url: "http://www.lighthouselabs.ca",
+    userId: "userRandomID",
+  },
+  "9sm5xK": {
+    url: 'http://www.google.com',
+    userId: "user2RandomID"
+  }
 };
 
 let rString = generateRandomString('0123456789abcdefghijklmnopqrstuvwxyz', 6);
