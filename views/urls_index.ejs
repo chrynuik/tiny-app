@@ -1,20 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>TinyApp</title>
+ <% include partials/_head %>
 </head>
 <body>
     <!-- Add your EJS code here -->
     <header>
       <% include partials/_header %>
     </header>
-    <ul>
+    <ul class="urls-list">
       <% for (var url in urls) { %>
-        <li style="margin-bottom: 20px; display: flex;">
+        <li>
           <a href="/urls/<%= url %>"><%= url %></a>: <%= urls[url] %>
 
           <a href="/urls/<%= url %>">Edit</a>
-          <form method="POST" action="/urls/<%= url %>/delete" style="display: inline-block">
+          <form method="POST" action="/urls/<%= url %>/delete">
             <input type="submit" value="Delete">
           </form>
 
