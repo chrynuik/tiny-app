@@ -1,0 +1,53 @@
+body {
+  font-family: Verdana, Arial, sans-serif;
+  padding: 0;
+  margin: 0;
+
+}
+a {
+  color: #0099ff;
+  text-decoration: none;
+}
+a:hover,
+a:focus {
+  color: #000;
+}
+h1 {
+  margin: 0;
+}
+header {
+  border-bottom: 1px solid #ccc;
+  background: #ff0099;
+  margin: 0 0 20px;
+  padding: 20px;
+  color: #fff;
+  text-align: center;
+}
+header a {
+  color: #fff;
+}
+header a:hover,
+header a:focus {
+  color: #000;
+}
+header label {
+  color: #000;
+}
+h2,
+.url-group {
+  margin: 0 20px;
+}
+.body-form {
+  margin: 20px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  background: #eee;
+}
+.body-form input[type="text"] {
+  min-width: 300px;
+}
+.urls-list li {
+  margin-bottom: 20px;
+  display: flex;
+}
