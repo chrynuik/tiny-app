@@ -41,16 +41,46 @@ let rString = generateRandomString('0123456789abcdefghijklmnopqrstuvwxyz', 6);
 
 let randomId= generateRandomString('0123456789abcdefghijklmnopqrstuvwxyz', 12);
 
+
+//create function that loops through looking for short urls that have user id and user looking return new object with only matching short links then set that to a variable
+
+
+function matchUserToUrls(user_id) {
+  let matchingUrlDatabase = {};
+  for (let each in urlDatabase) {
+    if (urlDatabase[each].userId === user_id) {
+      matchingUrlDatabase[each] = {
+        url: urlDatabase[each].url,
+        userID: urlDatabase[each].userId
+      }
+
+    }
+
+  };
+  return matchingUrlDatabase;
+};
+
 //delete the short url
 app.post("/urls/:id/delete", (req, res) => {
+  // check to see if the user's id matches the url's userId first
   delete urlDatabase[req.params.id];
   res.redirect('/urls/');
 });
 
 ///edit the long url
 app.post("/urls/:id", (req, res) =>{
-  urlDatabase[req.params.id] = req.body.longURL;
-  res.redirect(`/urls/${req.params.id}`);
+
+  for (userId in urlDatabase) {
+    if (userId === req.cookes[id]) {
+      // update this to store an object with the user id and new url
+      urlDatabase[req.params.id] = req.body.longURL;
+      res.redirect(`/urls/${req.params.id}`);
+    } else {
+      res.redirect("/urls");
+    }
+  }
+
+
 });
 
 //login
@@ -87,16 +117,13 @@ app.post("/login", (req, res) =>{
     res.redirect("/urls");
     return;
   }
-
   //find user
   for (user_Id in users) {
     const currentUser = users[user_Id];
     if (currentUser.email === req.body.email) {
       user = currentUser;
       break;
-
     }
-
   }
   //if email doesn't exist give 403 error
   if (!user) {
@@ -106,8 +133,6 @@ app.post("/login", (req, res) =>{
   res.cookie("id", user.id);
   res.redirect(`/urls/`);
 });
-
-
 
 //registration process
 app.get("/register", (req, res) => {
@@ -120,8 +145,6 @@ app.get("/register", (req, res) => {
 });
 
 app.post("/register", (req, res) => {
-
-
   const email = req.body.email;
   const password = req.body.password;
 
@@ -178,8 +201,12 @@ app.get("/urls", (req, res) => {
     user = {};
   }
 
+  let urlsMatch = matchUserToUrls(user_id);
+
+  console.log(urlsMatch);
+
   let templateVars = {
-    urls : urlDatabase,
+    urls : urlsMatch,
     id: user.id,
     email: user.email,
     user_id: user_id
@@ -190,10 +217,11 @@ app.get("/urls", (req, res) => {
 app.get("/urls/new", (req, res) => {
   const user_id = req.cookies["id"];
   let user = users[user_id];
-
+  console.log('NEW URL user:', user, 'user_id:', user_id);
   //if user is not logged in redirect to /login
   if (!user) {
     res.redirect("/login");
+    return;
   }
 
   let templateVars = {
@@ -211,38 +239,77 @@ app.get("/u/:shortURL", (req, res) => {
   if (!user) {
     user = {};
   }
+  // console.log(urlDatabase[req.params.shortURL]["url"]);
+  // console.log("urlDatabase[req.params.shortURL]")
+  // console.log(req.params.shortURL);
+  // console.log(urlDatabase[req.params.shortURL].url);
+  let longURL = urlDatabase[req.params.shortURL].url;
+
 
   let templateVars = {
     urls : urlDatabase,
     id: user.id,
     email: user.email,
-    user_id: user_id
+    user_id: user_id,
+    shortURL: req.params.id
+
   };
+ // console.log(templateVars[shortURL]);
+
   res.redirect(longURL);
 });
 
 app.get("/urls/:id", (req, res) => {
   const user_id = req.cookies["id"];
   let user = users[user_id];
+  let matchFound = false;
   if (!user) {
     user = {};
   }
-
   let templateVars = {
     urls : urlDatabase,
     id: user.id,
     email: user.email,
-    shortURL: req.params.id,
-    user_id: user_id
+    user_id: user_id,
+    shortURL: req.params.id
   };
-  res.render("urls_show", templateVars);
+
+
+    // console.log(templateVars.shortURL);
+    // console.log(match);
+    // console.log(urlDatabase[match].userId);
+    // console.log(req.cookies["id"]);
+    // console.log("new loop'")
+    if (urlDatabase[templateVars.shortURL].userId === req.cookies["id"]) {
+
+      console.log("FOUND MATCH!!!")
+      matchFound = true;
+    }
+
+  console.log(matchFound);
+  if (!matchFound) {
+    res.redirect("/urls/");
+  } else {
+    res.render("urls_show", templateVars);
+  }
+
+
+
+  //console.log(req.cookies["id"]);
+
 });
 
 
 
 app.post("/urls", (req, res) => {
-  console.log(req.body);
-  urlDatabase[rString] = req.body['longURL'];
+
+  let longURL = req.body['longURL'];
+  let userId = req.cookies["id"];
+  urlDatabase[rString] = {
+    userId : userId,
+    url: longURL
+  };
+  console.log(urlDatabase);
   res.redirect(`/urls/${rString}`);
 });
 
