@@ -5,12 +5,14 @@
   </head>
   <body>
     <header>
-    <% include partials/_header %>
-  </header>
-    <form action="/urls" method="POST">
-      <label for="longURL">Enter a URL:</label>
-      <input id="longURL" type="text" name="longURL" placeholder="http://">
-      <input type="submit" value="Submit">
-    </form>
+      <% include partials/_header %>
+    </header>
+    <main>
+      <form action="/urls" method="POST" class="body-form">
+        <label for="longURL">Enter a URL:</label>
+        <input id="longURL" type="text" name="longURL" placeholder="http://www.example.com">
+        <input type="submit" value="Submit">
+      </form>
+    </main>
   </body>
 </html>
