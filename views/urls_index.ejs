@@ -8,19 +8,26 @@
     <header>
       <% include partials/_header %>
     </header>
-    <ul class="urls-list">
-      <% for (var url in urls) { %>
-        <li>
-          <a href="/urls/<%= url %>"><%= url %></a>: <%= urls[url] %>
+    <main>
+      <% if (!id) {%>
+      <p>Please <a href="/login">login</a> to see your urls.</p>
+      <%} else {%>
+      <ul class="urls-list">
+        <% for (var url in urls) { %>
+          <li>
+            <a href="/urls/<%= url %>"><%= url %></a><span><%= urls[url].url %></span>
 
-          <a href="/urls/<%= url %>">Edit</a>
-          <form method="POST" action="/urls/<%= url %>/delete">
-            <input type="submit" value="Delete">
-          </form>
+            <div><a href="/urls/<%= url %>" class="button">Edit</a></div>
+            <form method="POST" action="/urls/<%= url %>/delete">
+              <input type="submit" value="Delete">
+            </form>
 
 
-        </li>
-      <% } %>
-    </ul>
+          </li>
+        <% } %>
+      </ul>
+      <a href ="/urls/new" class="new-link">Create New Short Link</a>
+      <% };%>
+    </main>
 </body>
 </html>
