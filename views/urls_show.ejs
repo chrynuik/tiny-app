@@ -7,14 +7,20 @@
     <header>
       <% include partials/_header %>
     </header>
-    <div>
+    <main>
+        <% if (user_id === urls[shortURL].userId) {%>
         <div class="url-group">
-          <a href="/u/<%= shortURL %>"><%= shortURL %></a>: <%= urls[shortURL] %>
+          <a href="/u/<%= shortURL %>"><%= shortURL %></a>: <%= urls[shortURL].url %>
         </div>
         <form method="POST" action="/urls/<%= shortURL %>" class="body-form">
-            <input id="longURL" type="text" name="longURL" placeholder="http://" value="<%= urls[shortURL] %>">
+            <input id="longURL" type="text" name="longURL" placeholder="http://" value="<%= urls[shortURL].url %>">
             <input type="submit" value="Edit">
           </form>
-    </div>
+        <%} else {%>
+        <p>You do not have acess to view this url</p>
+        <a href="/urls">View your urls</a>
+        <% };%>
+    </main>
+
 </body>
 </html>
