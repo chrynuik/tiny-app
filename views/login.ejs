@@ -7,22 +7,24 @@
     <header>
       <% include partials/_header %>
     </header>
-    <h2>Login Form</h2>
-    <% if (id === undefined) {%>
-    <form method="POST" action="/login" class="body-form">
-      <label for="email">Email</label>
-        <input id="email" type="email" name="email">
-        <label for="password">Password</label>
-         <input id="password" type="password" name="password">
-        <input type="submit" value="Submit">
-      </form>
-      <%} else {%>
-    <div>
-      You are logged in as <%= email %>
-      <form method="POST" action="/logout">
-        <input type="submit" value="logout">
-      </form>
-    </div>
-<% };%>
+    <main>
+      <h2>Login Form</h2>
+      <% if (id === undefined) {%>
+      <form method="POST" action="/login" class="body-form">
+        <label for="email">Email</label>
+          <input id="email" type="email" name="email">
+          <label for="password">Password</label>
+           <input id="password" type="password" name="password">
+          <input type="submit" value="Submit">
+        </form>
+        <%} else {%>
+      <div>
+        You are logged in as <%= email %>
+        <form method="POST" action="/logout">
+          <input type="submit" value="logout">
+        </form>
+      </div>
+  <% };%>
+  </main>
 </body>
 </html>
