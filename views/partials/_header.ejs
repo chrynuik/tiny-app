@@ -7,20 +7,12 @@
 </h1>
 
 <% if (!id) {%>
-  <div class ="header-buttons">
+  <div class="header-buttons">
     <a href="/login" class="button login-button">Login now!</a>
     <a href="/register" class="button">Register now!</a>
   </div>
 <%} else {%>
-<nav>
-  <ul>
-    <li><a href="/login">Login</a></li>
-    <li><a href="/register">Register</a></li>
-    <li><a href="/urls">View urls</a></li>
-    <li><a href="/urls/new">Add url</a></li>
-  </ul>
-</nav>
-<div>
+<div class="login-info">
   You are logged in as <%= email %>
 
   <form method="POST" action="/logout">
