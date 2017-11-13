@@ -1,23 +1,30 @@
 <h1>
-  Short URLS!!
+  <% if (!id) {%>
+    <a href="/login">ShortURLS!!</a>
+  <%} else {%>
+  <a href="/urls">Short URLS!!</a>
+  <% };%>
 </h1>
 
+<% if (!id) {%>
+  <div class ="header-buttons">
+    <a href="/login" class="button login-button">Login now!</a>
+    <a href="/register" class="button">Register now!</a>
+  </div>
+<%} else {%>
 <nav>
-  <ul style="display: flex; width: 100%; justify-content: center; list-style: none; padding: 0" >
-    <li style ="margin-right: 1rem"><a href="/login">Login Now</a></li>
-    <li style ="margin-right: 1rem"><a href="/register">Register</a></li>
-    <li style ="margin-right: 1rem"><a href="/urls">View urls</a></li>
-    <li style ="margin-right: 1rem"><a href="/urls/new">Add url</a></li>
+  <ul>
+    <li><a href="/login">Login</a></li>
+    <li><a href="/register">Register</a></li>
+    <li><a href="/urls">View urls</a></li>
+    <li><a href="/urls/new">Add url</a></li>
   </ul>
 </nav>
-
-<% if (!id) {%>
-  <a href="/login">login now!</a>
-<%} else {%>
 <div>
   You are logged in as <%= email %>
+
   <form method="POST" action="/logout">
-    <input type="submit" value="logout">
+    <input type="submit" value="logout" class="logout-button">
   </form>
 </div>
 <% };%>
