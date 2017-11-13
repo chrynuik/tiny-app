@@ -61,7 +61,8 @@ nav li:last-child {
 .logout-button {
   margin-top: 10px;
 }
-.header-buttons {
+.header-buttons,
+.login-info {
   margin-top: 10px;
 }
 .login-button {
